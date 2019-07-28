@@ -15,7 +15,7 @@ public class MazeDisplay extends JPanel{
 	
 	private Maze maze;
 	
-	MazeDisplay(){
+	public MazeDisplay(){
 		super();
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
@@ -26,13 +26,14 @@ public class MazeDisplay extends JPanel{
 		window.setVisible(true);
 		window.pack();
 		
-		maze = MazeMaker.generateMaze(5, 5);
+		this.maze = MazeMaker.generateMaze(5, 5);
 		repaint();
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		maze.draw(g);
+		
 	}
 	
 	public static void main(String[] args) {

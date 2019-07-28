@@ -123,12 +123,12 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int living =0;
 		for (int i = x-1;i<x+2;i++) {
 			for (int j=y-1;j<y+2;j++) {
-				if (i>-1&&i<cells.length&&j>-1&&j<cells[i].length) {
-					
+				if (i>-1&&i<cells.length&&j>-1&&j<cells[i].length&&(i!=x||j!=y)&&cells[i][j].isAlive) {
+					living++;
 				}
 			}
 		}
-		return 0;
+		return living;
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//10. Use e.getX() and e.getY() to determine
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
-		
+		cells[e.getX()/cellSize][e.getY()/cellSize].isAlive = !cells[e.getX()/cellSize][e.getY()/cellSize].isAlive;
 		
 		
 		
