@@ -43,10 +43,80 @@ package extras.the_wrong_way_cow;
 
 public class TheWrongWayCow {
 
-    public static int[] findWrongWayCow(final char[][] field) {
-        // Fill in the code to return the x,y coordinate position of the
-        // head (letter 'c') of the wrong way cow!
-        
-        return null;
-    }
+	public static int[] findWrongWayCow(final char[][] field) {
+		// Fill in the code to return the x,y coordinate position of the
+		// head (letter 'c') of the wrong way cow!
+		int up = 0, down = 0, left = 0, right = 0;
+		int[] cow = new int[2];
+		for (int i = 0; i < field.length; i++) {
+			for (int j = 0; j < field[0].length; j++) {
+				if (field[i][j] == 'c' && checkUp(i, j, field)) {
+					left++;
+				}
+				if (field[i][j] == 'c' && checkDown(i, j, field)) {
+					right++;
+				}
+				if (field[i][j] == 'c' && checkLeft(i, j, field)) {
+					up++;
+				}
+				if (field[i][j] == 'c' && checkRight(i, j, field)) {
+					down++;
+				}
+			}
+		}
+		for (int i = 0; i < field.length; i++) {
+			for (int j = 0; j < field[0].length; j++) {
+				if (left == 1&&checkUp(i,j,field)) {
+					cow[1]=i;
+					cow[0]=j;
+				}
+				if (right == 1&&checkDown(i,j,field)) {
+					cow[1]=i;
+					cow[0]=j;
+				}
+				if (up == 1&&checkLeft(i,j,field)) {
+					cow[1]=i;
+					cow[0]=j;
+				}
+				if (down == 1&&checkRight(i,j,field)) {
+					cow[1]=i;
+					cow[0]=j;
+				}
+			}
+		}
+		System.out.println(up + " " + down+ " " +left+ " " +right + " " + cow[0] + " "  + cow[1]);
+		return cow;
+	}
+
+	public static boolean checkUp(int i, int j, char[][] c) {
+		if (j < 2)
+			return false;
+		if (c[i][j - 1] == 'o' && c[i][j - 2] == 'w')
+			return true;
+		return false;
+	}
+
+	public static boolean checkDown(int i, int j, char[][] c) {
+		if (j > c[0].length - 3)
+			return false;
+		if (c[i][j + 1] == 'o' && c[i][j + 2] == 'w')
+			return true;
+		return false;
+	}
+
+	public static boolean checkLeft(int i, int j, char[][] c) {
+		if (i < 2)
+			return false;
+		if (c[i - 1][j] == 'o' && c[i - 2][j] == 'w')
+			return true;
+		return false;
+	}
+
+	public static boolean checkRight(int i, int j, char[][] c) {
+		if (i > c.length - 3)
+			return false;
+		if (c[i + 1][j] == 'o' && c[i + 2][j] == 'w')
+			return true;
+		return false;
+	}
 }
